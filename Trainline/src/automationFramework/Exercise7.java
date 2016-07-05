@@ -14,6 +14,7 @@ import org.testng.annotations.*;
 public class Exercise7 {
  
 	private WebDriver driver;
+	
 	@Parameters({ "browser" })
     
     @BeforeTest
@@ -38,7 +39,7 @@ public class Exercise7 {
           
     }
 	
-	@BeforeTest
+	@Test (priority = 0)
     public void verifyHomepage() {
     	
 		driver.get("https://www.thetrainline.com");
