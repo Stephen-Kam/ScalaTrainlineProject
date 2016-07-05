@@ -14,7 +14,7 @@ public class Exercise1 {
          WebElement from;
          WebElement to;
          WebElement find;
-
+         
          //open the website
          driver = new FirefoxDriver();
          driver.get("http://sports.williamhill.com/bet/en-gb");

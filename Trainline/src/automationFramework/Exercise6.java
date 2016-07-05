@@ -2,14 +2,42 @@ package automationFramework;
 
 import org.testng.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.*;
+import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.*;
 
  
 public class Exercise6 {
  
 	//Declare our variables
-	WebDriver driver = new FirefoxDriver();
+	private WebDriver driver;
+	
+	@Parameters
+	({"browser"})
+	
+	@BeforeTest
+	public void openBrowser(String browser) {
+		try { 
+			if (browser.equalsIgnoreCase("Firefox")) {
+                driver = new FirefoxDriver();
+          } 
+          else if (browser.equalsIgnoreCase("Safari")) {
+              driver = new SafariDriver();
+       }
+          else if (browser.equalsIgnoreCase("chrome")) {
+                System.setProperty("webdriver.chrome.driver", "/Users/umargurung/Desktop/chromedriver");
+                driver = new ChromeDriver();
+          
+          }
+          
+  
+   } catch (WebDriverException e) {
+          System.out.println(e.getMessage());
+   }
+  
+}
+
 	
 	
 	@Test (priority = 1)
