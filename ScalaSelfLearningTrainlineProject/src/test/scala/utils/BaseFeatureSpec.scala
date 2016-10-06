@@ -9,15 +9,10 @@ trait BaseFeatureSpec
     with DriverInitialisation
     with Matchers
     with WebBrowser
-    with BeforeAndAfterEach
-    with BeforeAndAfterAll {
+    with BeforeAndAfterEach {
 
   override def beforeEach() = {
-    driver.manage.deleteAllCookies()
+    delete all cookies
     driver.manage().window().maximize()
-  }
-
-  override def afterAll() = {
-
   }
 }

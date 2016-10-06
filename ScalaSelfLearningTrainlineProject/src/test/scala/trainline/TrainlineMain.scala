@@ -1,6 +1,6 @@
 package trainline
 
-import pages.Homepage
+import pages.{Homepage, TimetablePage}
 import utils.BaseFeatureSpec
 
 class TrainlineMain extends BaseFeatureSpec {
@@ -79,7 +79,7 @@ class TrainlineMain extends BaseFeatureSpec {
       click on "submitButton"
 
       Then("The correct outDate will be visible")
-      Homepage.outDateXpath().get.text should include regex "7th Oct"
+      TimetablePage.outDateXpath().get.text should include regex "7th Oct"
     }
 
     scenario("Exercise Five") {
@@ -87,7 +87,7 @@ class TrainlineMain extends BaseFeatureSpec {
       Homepage.navigateToWebPage()
 
       Then("The page title will be correct the oneway option unchecked")
-      Homepage.assertPageTitleIsCorrect()
+      TimetablePage.assertPageTitleIsCorrect()
       Homepage.checkOneWayCheckbox()
 
       When("I enter in the two stations")
@@ -100,14 +100,48 @@ class TrainlineMain extends BaseFeatureSpec {
       click on "submitButton"
 
       Then("The correct outDate will be visible")
-      Homepage.assertTimetableOutdateIsCorrect()
+      TimetablePage.assertTimetableOutdateIsCorrect()
     }
-  }
 
-  feature("") {
-    scenario("") {
-      Given("")
+    scenario("Exercise Six") {
+      Given("I am on a the trainline website")
       Homepage.navigateToWebPage()
+
+      Then("The page title will be correct the oneway option unchecked")
+      TimetablePage.assertPageTitleIsCorrect()
+      Homepage.checkOneWayCheckbox()
+
+      When("I enter in the two stations and click the tomorrow and next day buttons")
+      Homepage.enterInStations()
+      Homepage.clickTomorrowAndNextDay()
+
+      And("select a number of adults for the journey")
+      Homepage.selectNumberOfAdultsAndClose()
+
+      When("I click submit")
+      click on "submitButton"
+
+      Then("The correct number of adults will be visible")
+      TimetablePage.assertCorrectNumberOfAdults()
+    }
+
+    scenario("Exercise Seven") {
+      Given("I am on a the trainline website")
+      Homepage.navigateToWebPage()
+
+      Then("The page title will be correct the oneway option unchecked")
+      TimetablePage.assertPageTitleIsCorrect()
+      Homepage.checkOneWayCheckbox()
+
+      When("I enter in the two stations and I select an outdate in the future")
+      Homepage.enterInStations()
+      Homepage.selectDate(60)
+
+      And("I click submit")
+      click on "submitButton"
+
+      Then("The correct outdate will be displayed")
+      TimetablePage.assertTimetableOutdateIsCorrect()
     }
   }
 }
